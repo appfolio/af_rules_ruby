@@ -1,0 +1,41 @@
+#———————————————————————————————————————————————————————————————————————
+# Define Ruby executable, test, spec and package a gem
+#———————————————————————————————————————————————————————————————————————
+load(
+    "@bazelruby_rules_ruby//ruby:defs.bzl",
+    "ruby_test",
+    "ruby_library"
+)
+
+filegroup(
+  name = "tool-versions",
+  srcs = [".tool-versions"],
+  visibility = ["//visibility:public"]
+)
+
+ruby_library(
+  name = "app",
+  srcs = glob(
+    include = [
+      "app/**/*",
+      "config/**/*",
+      "bin/*",
+      "config.ru",
+    ]
+  ),
+  deps = [
+    "@bundle//:gems"
+  ],
+)
+ruby_test(
+    name = "app-test",
+    srcs = glob(
+      include = [
+        "test/**/*"
+      ],
+    ),
+    main = "test/all_bazel_tests.rb",
+    deps = [
+      ":app"
+    ]
+)
