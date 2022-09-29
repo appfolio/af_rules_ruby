@@ -1,0 +1,13 @@
+.git
+.dockerignore
+.bundle
+.idea
+
+vendor/bundle
+shared_tmp
+**/node_modules
+**/coverage
+db/schema.rb
+log
+tmp
+!.cache

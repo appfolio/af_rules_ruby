@@ -1,0 +1,17 @@
+local_repository(
+    name = "af_rules_ruby",
+    path = "..",
+)
+
+# load("@af_rules_ruby//:bundle.bzl", "af_ruby_bundle")
+# load("@af_rules_ruby//:miniature.bzl", "miniature")
+
+
+# need to declare dependencies, install them before anything else
+print('loading af-ruby-bundle')
+# af_ruby_bundle(
+#   name = "bundle",
+#   path = "."
+# )
+
+# af_ruby_bundle

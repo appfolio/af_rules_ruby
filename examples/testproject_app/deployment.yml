@@ -1,0 +1,10 @@
+default: &default
+  chart:
+    name: rails-base-multipods
+    version: ^6
+
+qa:
+  <<: *default
+
+production:
+  <<: *default

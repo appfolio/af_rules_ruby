@@ -1,0 +1,21 @@
+# Put any settings here for a rails production environment (i.e QA and Prod)
+
+<%
+  config = Rails.application.deployment_config
+%>
+
+
+mysql:
+  host: <%= config.fetch('mysql').fetch('host') %>
+  port: <%= config.fetch('mysql').fetch('port') %>
+  username: testproject
+
+mysql_tmp:
+  host: <%= config.fetch('mysql_tmp').fetch('host') %>
+  port: <%= config.fetch('mysql_tmp').fetch('port') %>
+  username: testproject
+
+
+rails:
+  session:
+    secure: true

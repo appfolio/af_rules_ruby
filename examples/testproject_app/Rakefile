@@ -1,0 +1,14 @@
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+
+require_relative "config/application"
+
+Rails.application.load_tasks
+# https://itnext.io/how-to-use-webpacker-with-npm-instead-of-yarn-a8a764e3a8ab
+# Replace yarn with npm
+Rake::Task['yarn:install'].clear if Rake::Task.task_defined?('yarn:install')
+Rake::Task['webpacker:check_yarn'].clear
+Rake::Task['webpacker:yarn_install'].clear
+Rake::Task.define_task('webpacker:check_yarn' => [])
+Rake::Task.define_task('webpacker:yarn_install' => ['webpacker:npm_install'])
+Rake::Task.define_task('webpacker:verify_install' => ['webpacker:check_npm'])

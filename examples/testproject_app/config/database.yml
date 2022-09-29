@@ -1,0 +1,56 @@
+default: &default
+  adapter: mysql2
+  username: <%= AfSettings.dig!('mysql', 'username') %>
+  host: <%= AfSettings.dig!('mysql', 'host') %>
+  port: <%= AfSettings.dig!('mysql')['port'] %>
+  password: <%= AfSettings.dig!('mysql')['password'] %>
+  encoding: utf8
+  strict: true
+  hijack: {}
+
+default_tmp: &default_tmp
+  adapter: mysql2
+  username: <%= AfSettings.dig!('mysql_tmp', 'username') %>
+  host: <%= AfSettings.dig!('mysql_tmp', 'host') %>
+  port: <%= AfSettings.dig!('mysql_tmp')['port'] %>
+  password: <%= AfSettings.dig!('mysql_tmp')['password'] %>
+  encoding: utf8
+  strict: true
+  hijack:
+    tmp: true
+
+development:
+  primary:
+    <<: *default
+    collation: utf8_general_ci
+    database: testproject_development
+    variables:
+      explicit_defaults_for_timestamp: on
+  tmp:
+    <<: *default_tmp
+    collation: utf8_general_ci
+    database: testproject_tmp_development
+    variables:
+      explicit_defaults_for_timestamp: on
+
+test:
+  primary:
+    <<: *default
+    collation: utf8_general_ci
+    database: <%= [ 'testproject', 'test', ENV['TEST_ENV_NAME'], ENV['TEST_ENV_NUMBER'] ].compact.join('_') %>
+    variables:
+      explicit_defaults_for_timestamp: on
+  tmp:
+    <<: *default_tmp
+    collation: utf8_general_ci
+    database: <%= [ 'testproject', 'tmp', 'test', ENV['TEST_ENV_NAME'], ENV['TEST_ENV_NUMBER'] ].compact.join('_') %>
+    variables:
+      explicit_defaults_for_timestamp: on
+
+production:
+  primary:
+    <<: *default
+    database: testproject_production
+  tmp:
+    <<: *default_tmp
+    database: testproject_tmp_production

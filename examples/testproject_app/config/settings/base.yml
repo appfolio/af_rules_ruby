@@ -1,0 +1,24 @@
+# Declare the union of settings across all registered environments.
+# Global settings which do not vary across environments are the only values permitted in this base configuration.
+# See https://sites.google.com/a/appfolio.com/eng/resources/code/afsettings-developer-guide for more info.
+
+mysql:
+  host:                 # string
+  password:             # string
+  port:                 # integer
+  username:             # string
+
+mysql_tmp:
+  host:                 # string
+  password:             # integer
+  port:                 # string
+  username:             # string
+
+rails:
+  secret_key_base:      # long random string
+  session:
+    secure:             # boolean
+
+rollbar:
+  post_server_item_access_token: # string
+

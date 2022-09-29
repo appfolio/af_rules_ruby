@@ -1,0 +1,23 @@
+# Put any settings here for the test environment
+
+mysql:
+  host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
+  username: root
+  password:
+  port:
+
+mysql_tmp:
+  host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
+  username: root
+  password:
+  port:
+
+rails:
+  secret_key_base: >-
+    b0b0e9399781e655f1274a9ce6d9a8cf10e1624f849fde4cd98b91d23ae4dcb0
+    22e37cb1b89aeb473fbba44f40d90c903078d4f473b207db08013f3f3442f16a
+  session:
+    secure: false
+
+rollbar:
+  post_server_item_access_token: dummy
