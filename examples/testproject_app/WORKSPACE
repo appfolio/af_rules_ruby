@@ -1,17 +1,30 @@
+workspace(name = "bazelruby_rules_ruby_examples_test_project_app")
+
+# Importing rules_ruby from the parent directory for developing
+# rules_ruby itself...
 local_repository(
-    name = "af_rules_ruby",
-    path = "..",
+    name = "bazelruby_rules_ruby",
+    path = "../..",
 )
 
-# load("@af_rules_ruby//:bundle.bzl", "af_ruby_bundle")
-# load("@af_rules_ruby//:miniature.bzl", "miniature")
+load(
+    "@bazelruby_rules_ruby//ruby:deps.bzl",
+    "rules_ruby_dependencies",
+    "rules_ruby_select_sdk",
+)
 
+rules_ruby_dependencies()
 
-# need to declare dependencies, install them before anything else
-print('loading af-ruby-bundle')
-# af_ruby_bundle(
-#   name = "bundle",
-#   path = "."
-# )
+rules_ruby_select_sdk(version = "2.7.5")
 
-# af_ruby_bundle
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+load("@bazelruby_rules_ruby//ruby:defs.bzl", "af_ruby_bundle")
+
+af_ruby_bundle(
+    name = "bundle",
+    gemfile = "//:Gemfile",
+    gemfile_lock = "//:Gemfile.lock",
+)

@@ -17,6 +17,11 @@ load(
     _ruby_bundle = "ruby_bundle_install",
 )
 load(
+    "@bazelruby_rules_ruby//ruby/private/af_bundle:def.bzl",
+    _af_bundle = "bundle_install",
+    _af_ruby_bundle = "ruby_bundle_install",
+)
+load(
     "@bazelruby_rules_ruby//ruby/private:rspec.bzl",
     _rspec = "ruby_rspec",
     _rspec_test = "ruby_rspec_test",
@@ -39,6 +44,8 @@ ruby_rspec_test = _rspec_test
 ruby_rspec = _rspec
 ruby_bundle = _ruby_bundle
 ruby_bundle_install = _bundle
+af_ruby_bundle = _af_ruby_bundle
+af_ruby_bundle_install = _af_bundle
 ruby_rubocop = _rubocop
 ruby_gemspec = _gemspec
 ruby_gem = _gem
